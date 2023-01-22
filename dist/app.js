@@ -1,0 +1,12 @@
+import express from 'express';
+import { postJob, getJobs, getJobsByMatch, patchJob, deleteJob } from './controllers/jobs.controller.js';
+import { idValidation } from './middlewares/idValidation.middleware.js';
+var server = express();
+server.use(express.json());
+server.post('/job', postJob);
+server.get('/jobs', getJobs);
+server.get('/match', getJobsByMatch);
+server.patch('/summoned/:id', idValidation, patchJob);
+server["delete"]('/erase/:id', idValidation, deleteJob);
+var port = 4000;
+server.listen(port, function () { return console.log('App listening on localhost:' + port); });
